@@ -1,11 +1,11 @@
 import { useState } from "react";
 import Card from "../UI/Card";
 import ExpensesFilter from "./ExpensesFilter";
-import ExpenseItem from "./ExpenseItem";
+import ExpensesList from "./ExpensesList";
 import "./Expenses.css";
 
 const Expenses = props => {
-  const [filteredYear, setFilteredYear] = useState("2021");
+  const [filteredYear, setFilteredYear] = useState("2022");
   const filterChangeHandler = selectedYear => {
     setFilteredYear(selectedYear);
   };
@@ -20,14 +20,20 @@ const Expenses = props => {
           selected={filteredYear}
           onChangeFilter={filterChangeHandler}
         />
-        {filteredExpenses.map(expense => (
-          <ExpenseItem
-            key={expense.id}
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-          />
-        ))}
+        {/* Rendering Conditional Content Approach -1  */}
+        {/* The part after the && is rendered if the condition or expression before the && evaluates to true */}
+        {/* {filteredExpenses.length === 0 && <p>No Expenses found.</p>}
+        {filteredExpenses.length > 0 &&
+          filteredExpenses.map(expense => (
+            <ExpenseItem
+              key={expense.id}
+              title={expense.title}
+              amount={expense.amount}
+              date={expense.date}
+            />
+          ))} */}
+        {/* Rendering Conditional Content Approach -2  */}
+        <ExpensesList items={filteredExpenses} />
       </Card>
     </div>
   );
